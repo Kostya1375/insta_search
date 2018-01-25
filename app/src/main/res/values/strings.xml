@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">InstaSearch</string>
+    <string name="instagram_client_id">11abb6311486489d9e56f9577615620e</string>
+    <string name="instagram_redirect_uri">https://nds1995.com/</string>
+</resources>
