@@ -5,8 +5,8 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import ua.com.dowell.instasearch.MainApplication
-import ua.com.dowell.instasearch.model.AccountHelper
-import ua.com.dowell.instasearch.model.InstagramModel
+import ua.com.dowell.instasearch.model.BindModule
+import ua.com.dowell.instasearch.model.impl.ApiImpl
 import javax.inject.Singleton
 
 /**
@@ -18,14 +18,12 @@ import javax.inject.Singleton
     ActivityBuilder::class,
     FragmentBuilder::class,
     BindModule::class,
-    AppModule::class
+    AppModule::class,
+    ApiImpl::class
 ])
 interface AppComponent : AndroidInjector<MainApplication> {
 
     override fun inject(application: MainApplication)
-
-    fun getAccountHelper(): AccountHelper
-    fun getInstagramModel(): InstagramModel
 
     @Component.Builder
     interface Builder {

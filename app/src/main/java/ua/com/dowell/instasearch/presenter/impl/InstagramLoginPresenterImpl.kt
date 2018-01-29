@@ -5,9 +5,9 @@ import okhttp3.HttpUrl
 import timber.log.Timber
 import ua.com.dowell.instasearch.misc.InstagramLoginWebViewClient
 import ua.com.dowell.instasearch.model.AccountHelper
-import ua.com.dowell.instasearch.model.InstagramModel
+import ua.com.dowell.instasearch.model.InstagramUrlModel
 import ua.com.dowell.instasearch.presenter.InstagramLoginPresenter
-import ua.com.dowell.instasearch.view.InstagramView
+import ua.com.dowell.instasearch.view.fragment.instagram.InstagramView
 import javax.inject.Inject
 
 /**
@@ -15,7 +15,7 @@ import javax.inject.Inject
  */
 class InstagramLoginPresenterImpl @Inject constructor(
         private val accHelper: AccountHelper,
-        private val instagramModel: InstagramModel
+        private val instagramModel: InstagramUrlModel
 ) : InstagramLoginPresenter {
 
     private val clientId = "client_id"

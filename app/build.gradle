@@ -24,6 +24,7 @@ android {
 ext {
     dagger = '2.13'
     retrofit = '2.3.0'
+    okHttp = '3.8.0'
     gson = '2.8.2'
     timber = '4.6.0'
 }
@@ -45,6 +46,11 @@ dependencies {
 
     // retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+
+    // okhttp
+    implementation "com.squareup.okhttp3:okhttp:$okHttp"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp"
 
     // gson
     implementation "com.google.code.gson:gson:$gson"

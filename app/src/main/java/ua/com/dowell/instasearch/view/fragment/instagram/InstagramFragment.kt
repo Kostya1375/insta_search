@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import dagger.android.support.DaggerFragment
-import okhttp3.OkHttpClient
 import timber.log.Timber
 import ua.com.dowell.instasearch.presenter.InstagramLoginPresenter
-import ua.com.dowell.instasearch.view.InstagramView
 import javax.inject.Inject
 
 /**
@@ -40,9 +38,14 @@ class InstagramFragment : DaggerFragment(), InstagramView {
         webView.loadUrl(url)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.disposeView()
+    }
+
     override fun dismissView() {
 //        todo other implementation
-        activity.finish()
+        activity.onBackPressed()
     }
 
     companion object {

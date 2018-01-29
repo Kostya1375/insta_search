@@ -3,7 +3,7 @@ package ua.com.dowell.instasearch.model
 /**
  * Created by kosty on 23.01.2018.
  */
-interface InstagramModel {
+interface InstagramUrlModel {
 
     val scheme: String
     val host: String

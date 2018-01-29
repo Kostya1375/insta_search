@@ -6,14 +6,14 @@ import android.os.Build
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import ua.com.dowell.instasearch.model.InstagramModel
+import ua.com.dowell.instasearch.model.InstagramUrlModel
 import ua.com.dowell.instasearch.presenter.InstagramLoginPresenter
 
 /**
  * Created by kosty on 23.01.2018.
  */
 class InstagramLoginWebViewClient(private val presenter: InstagramLoginPresenter,
-                                  private val instagramModel: InstagramModel) : WebViewClient() {
+                                  private val instagramModel: InstagramUrlModel) : WebViewClient() {
 
     override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
         return interceptUrlLoading(url)

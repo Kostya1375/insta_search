@@ -1,11 +1,11 @@
-package ua.com.dowell.instasearch.di
+package ua.com.dowell.instasearch.model
 
 import dagger.Binds
 import dagger.Module
 import ua.com.dowell.instasearch.model.AccountHelper
-import ua.com.dowell.instasearch.model.InstagramModel
+import ua.com.dowell.instasearch.model.InstagramUrlModel
 import ua.com.dowell.instasearch.model.impl.AccountHelperImpl
-import ua.com.dowell.instasearch.model.impl.InstagramModelImpl
+import ua.com.dowell.instasearch.model.impl.InstagramUrlModelImpl
 
 /**
  * Created by kosty on 23.01.2018.
@@ -17,5 +17,5 @@ interface BindModule {
     fun provideAccountHelper(accountHelperImpl: AccountHelperImpl): AccountHelper
 
     @Binds
-    fun provideInstagramModel(instagramModelImpl: InstagramModelImpl): InstagramModel
+    fun provideInstagramUrlModel(instagramModelImpl: InstagramUrlModelImpl): InstagramUrlModel
 }

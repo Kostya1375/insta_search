@@ -2,13 +2,13 @@ package ua.com.dowell.instasearch.model.impl
 
 import android.content.Context
 import ua.com.dowell.instasearch.R
-import ua.com.dowell.instasearch.model.InstagramModel
+import ua.com.dowell.instasearch.model.InstagramUrlModel
 import javax.inject.Inject
 
 /**
  * Created by kosty on 23.01.2018.
  */
-class InstagramModelImpl @Inject constructor(context: Context) : InstagramModel {
+class InstagramUrlModelImpl @Inject constructor(context: Context) : InstagramUrlModel {
     override val scheme: String = "https"
     override val host: String = "api.instagram.com"
     override val pathSegment1: String = "oauth"

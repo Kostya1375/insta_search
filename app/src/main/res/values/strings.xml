@@ -2,4 +2,8 @@
     <string name="app_name">InstaSearch</string>
     <string name="instagram_client_id">11abb6311486489d9e56f9577615620e</string>
     <string name="instagram_redirect_uri">https://nds1995.com/</string>
+    <string name="welcome_text_0">welcome to ScanMe</string>
+    <string name="welcome_text_1">Welcome to ScanMe2</string>
+    <string name="welcome_text_2">Welcome to ScanMe3</string>
+    <string name="login_with_instagram">login with instagram</string>
 </resources>

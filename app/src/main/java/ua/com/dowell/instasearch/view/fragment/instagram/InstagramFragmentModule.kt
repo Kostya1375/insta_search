@@ -3,10 +3,9 @@ package ua.com.dowell.instasearch.view.fragment.instagram
 import dagger.Module
 import dagger.Provides
 import ua.com.dowell.instasearch.model.AccountHelper
-import ua.com.dowell.instasearch.model.InstagramModel
+import ua.com.dowell.instasearch.model.InstagramUrlModel
 import ua.com.dowell.instasearch.presenter.InstagramLoginPresenter
 import ua.com.dowell.instasearch.presenter.impl.InstagramLoginPresenterImpl
-import ua.com.dowell.instasearch.view.InstagramView
 
 /**
  * Created by kosty on 24.01.2018.
@@ -20,7 +19,7 @@ class InstagramFragmentModule {
     }
 
     @Provides
-    fun instagramPresenter(accountHelper: AccountHelper, instagramModel: InstagramModel): InstagramLoginPresenter {
+    fun instagramPresenter(accountHelper: AccountHelper, instagramModel: InstagramUrlModel): InstagramLoginPresenter {
         return InstagramLoginPresenterImpl(accountHelper, instagramModel)
     }
 }
