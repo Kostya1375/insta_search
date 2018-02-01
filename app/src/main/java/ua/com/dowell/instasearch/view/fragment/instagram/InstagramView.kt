@@ -7,4 +7,6 @@ import ua.com.dowell.instasearch.view.BaseView
  */
 interface InstagramView: BaseView {
     fun dismissView()
+    fun showProgressBar()
+    fun dismissProgressBar()
 }

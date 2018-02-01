@@ -21,7 +21,7 @@ class WelcomeFragmentModule {
 
     @Provides
     fun welcomePresenter(accountHelper: AccountHelper, welcomeNavigator: WelcomeNavigator): WelcomePresenter {
-        return WelcomePresenterImpl(accountHelper,welcomeNavigator)
+        return WelcomePresenterImpl(accountHelper, welcomeNavigator)
     }
 
     @Provides

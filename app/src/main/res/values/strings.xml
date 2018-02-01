@@ -1,9 +1,17 @@
 <resources>
-    <string name="app_name">InstaSearch</string>
+    <string name="app_name">FinderMe</string>
     <string name="instagram_client_id">11abb6311486489d9e56f9577615620e</string>
     <string name="instagram_redirect_uri">https://nds1995.com/</string>
     <string name="welcome_text_0">welcome to ScanMe</string>
     <string name="welcome_text_1">Welcome to ScanMe2</string>
     <string name="welcome_text_2">Welcome to ScanMe3</string>
     <string name="login_with_instagram">login with instagram</string>
+    <string name="layout_manager_path">android.support.v7.widget.LinearLayoutManager</string>
+    <string name="search">Search</string>
+    <string name="profile">Profile</string>
+    <string name="checking_your_location">Checking your location..</string>
+    <string name="no_nearby_users">No nearby users found :(</string>
+    <string name="something_went_wrong">Sorry! Something went wrong</string>
+    <string name="adjust_search_distance_here">Adjust search distance here:</string>
+    <string name="battery_drain_hint">To prevent battery draining this app won\'t work at background.</string>
 </resources>

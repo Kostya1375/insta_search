@@ -5,4 +5,5 @@ package ua.com.dowell.instasearch
  */
 object Constants {
     const val TOKEN = "token_preferences_name"
+    const val DISTANCE = "search_distance_value"
 }

@@ -2,6 +2,7 @@ package ua.com.dowell.instasearch.presenter.impl
 
 import android.os.Handler
 import android.support.v4.view.PagerAdapter
+import timber.log.Timber
 import ua.com.dowell.instasearch.adapter.WelcomeAdapter
 import ua.com.dowell.instasearch.model.AccountHelper
 import ua.com.dowell.instasearch.navigator.WelcomeNavigator
@@ -34,14 +35,16 @@ class WelcomePresenterImpl(
     }
 
     override fun checkIfLoggedIn() {
-        if (accountHelper.getToken().isNotBlank())
-            navigator.proceedToMainActivity()
+        val token = accountHelper.getToken()
+        Timber.d("TOKEN: $token")
+        if (token.isNotBlank()) navigator.proceedToMainActivity()
     }
 
     override fun createAdapter(): PagerAdapter = WelcomeAdapter()
 
     private fun onViewSet() {
         queueSwipe()
+        welcomeView?.handleLoginClick()
     }
 
     private fun queueSwipe() {

@@ -3,23 +3,38 @@ package ua.com.dowell.instasearch.view.activity.main
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.view.Menu
+import android.view.MenuItem
 import dagger.android.support.DaggerAppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import ua.com.dowell.instasearch.R
+import ua.com.dowell.instasearch.misc.replaceFragment
 import ua.com.dowell.instasearch.view.fragment.main.MainFragment
+import ua.com.dowell.instasearch.view.fragment.profile.ProfileFragment
 
 /**
  * Created by kosty on 25.01.2018.
  */
 class MainActivity : DaggerAppCompatActivity(), MainView {
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, MainFragment.instance())
-                .commit()
+        setSupportActionBar(toolbar)
+        replaceFragment(R.id.container, MainFragment.instance())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_bottom, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.action_profile -> replaceFragment(R.id.container, ProfileFragment.instance(), null)
+            else -> return false
+        }
+        return true
     }
 
     companion object {

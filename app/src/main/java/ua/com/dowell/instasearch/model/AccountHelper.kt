@@ -8,4 +8,7 @@ interface AccountHelper {
     fun saveToken(token: String)
     fun getToken(): String
     fun clearToken()
+
+    fun getDistanceSettings(): Int
+    fun setDistanceSettings(value: Int)
 }

@@ -23,3 +23,6 @@
 # retrofit
 -dontwarn okio.**
 -dontwarn javax.annotation.**
+
+# picasso
+-dontwarn com.squareup.okhttp.**

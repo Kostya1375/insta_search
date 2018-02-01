@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_welcome.*
+import timber.log.Timber
 import ua.com.dowell.instasearch.R
 import ua.com.dowell.instasearch.presenter.WelcomePresenter
 import javax.inject.Inject
@@ -36,8 +37,12 @@ class WelcomeFragment : DaggerFragment(), WelcomeView {
         super.onResume()
         presenter.checkIfLoggedIn()
     }
+
     override fun handleLoginClick() {
-        login_button.setOnClickListener { presenter.onLoginClick() }
+        login_button.setOnClickListener {
+            Timber.d("click")
+            presenter.onLoginClick()
+        }
     }
 
     override fun swipeView() {

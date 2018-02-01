@@ -1,5 +1,6 @@
 package ua.com.dowell.instasearch.model.impl
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.Interceptor
@@ -22,6 +23,7 @@ class ApiImpl {
     fun providesApi(accHelper: AccountHelper): Api {
         return Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .baseUrl(BASE_URL)
                 .client(createOkHttpClient(accHelper))
                 .build()
@@ -38,8 +40,8 @@ class ApiImpl {
     private fun createHeaderInterceptor(accHelper: AccountHelper) = Interceptor { chain ->
         val request: Request = chain.request()
         val builder: Request.Builder = request.newBuilder()
-        builder.addHeader("Accept", "application/json")
-        accHelper.getToken().let { builder.addHeader("Authorization", "Bearer $it") }
+        builder.addHeader("Content-Type", "application/json")
+        accHelper.getToken().let { builder.addHeader("Authorization", it) }
         chain.proceed(builder.build())
     }
 

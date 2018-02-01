@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#bf27eb</color>
+    <color name="colorPrimaryDark">#9c27b0</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="gradient_start">#9575cd</color>
+    <color name="gradient_1">#aa4edc</color>
+    <color name="gradient_2">#bf27eb</color>
+    <color name="gradient_end">#d500f9</color>
+
+    <!--r: +21 -->
+    <!--g: -39 -->
+    <!--b: +15 -->
 </resources>

@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import ua.com.dowell.instasearch.model.AccountHelper
 import ua.com.dowell.instasearch.model.InstagramUrlModel
+import ua.com.dowell.instasearch.model.rest.Api
 import ua.com.dowell.instasearch.presenter.InstagramLoginPresenter
 import ua.com.dowell.instasearch.presenter.impl.InstagramLoginPresenterImpl
 
@@ -19,7 +20,11 @@ class InstagramFragmentModule {
     }
 
     @Provides
-    fun instagramPresenter(accountHelper: AccountHelper, instagramModel: InstagramUrlModel): InstagramLoginPresenter {
-        return InstagramLoginPresenterImpl(accountHelper, instagramModel)
+    fun instagramPresenter(
+            api: Api,
+            accountHelper: AccountHelper,
+            instagramModel: InstagramUrlModel
+    ): InstagramLoginPresenter {
+        return InstagramLoginPresenterImpl(api, accountHelper, instagramModel)
     }
 }
