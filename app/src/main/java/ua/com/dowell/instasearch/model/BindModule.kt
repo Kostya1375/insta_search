@@ -4,7 +4,7 @@ import dagger.Binds
 import dagger.Module
 import ua.com.dowell.instasearch.model.impl.AccountHelperImpl
 import ua.com.dowell.instasearch.model.impl.InstagramUrlModelImpl
-import ua.com.dowell.instasearch.model.impl.LocationProviderImpl
+import ua.com.dowell.instasearch.model.impl.PlayServicesLocationProvider
 
 /**
  * Created by kosty on 23.01.2018.
@@ -19,5 +19,5 @@ interface BindModule {
     fun provideInstagramUrlModel(instagramModelImpl: InstagramUrlModelImpl): InstagramUrlModel
 
     @Binds
-    fun provideLocationProvider(locationProviderImpl: LocationProviderImpl): LocationProvider
+    fun provideLocationProvider(playServicesLocationProvider: PlayServicesLocationProvider): LocationProvider
 }
