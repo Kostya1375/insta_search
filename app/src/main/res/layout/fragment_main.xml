@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layoutManager="@string/layout_manager_path" />
+        app:layoutManager="@string/linear_layout_manager_path" />
 
     <LinearLayout
         android:id="@+id/placeholder"

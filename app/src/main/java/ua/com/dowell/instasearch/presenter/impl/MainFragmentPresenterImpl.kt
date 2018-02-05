@@ -1,6 +1,7 @@
 package ua.com.dowell.instasearch.presenter.impl
 
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
 import ua.com.dowell.instasearch.model.AccountHelper
@@ -39,7 +40,7 @@ class MainFragmentPresenterImpl(
     }
 
     private fun requestNearbyUsers(location: LocationQuery.Location) {
-        launch {
+        async {
             try {
                 val distance = accountHelper.getDistanceSettings()
                 val list = api.getNearby(LocationQuery(location, distance)).await()

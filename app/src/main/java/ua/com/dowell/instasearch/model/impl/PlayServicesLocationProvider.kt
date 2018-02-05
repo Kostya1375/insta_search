@@ -33,10 +33,12 @@ class PlayServicesLocationProvider @Inject constructor(context: Context) : AbsLo
     }
 
     override fun startSpectating() {
+        super.startSpectating()
         service.requestLocationUpdates(request, callback, null)
     }
 
     override fun stopSpectating() {
+        super.stopSpectating()
         service.removeLocationUpdates(callback)
     }
 }

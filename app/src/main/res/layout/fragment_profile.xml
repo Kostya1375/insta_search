@@ -80,7 +80,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:max="50"
+        android:max="5000"
+        android:min="5"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_title" />

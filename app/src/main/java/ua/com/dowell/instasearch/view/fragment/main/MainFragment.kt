@@ -5,17 +5,17 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 import ua.com.dowell.instasearch.R
 import ua.com.dowell.instasearch.adapter.UserAdapter
 import ua.com.dowell.instasearch.misc.hideScaled
+import ua.com.dowell.instasearch.misc.replaceFragment
 import ua.com.dowell.instasearch.misc.showScaled
 import ua.com.dowell.instasearch.model.pojo.User
 import ua.com.dowell.instasearch.presenter.MainFragmentPresenter
+import ua.com.dowell.instasearch.view.fragment.profile.ProfileFragment
 import javax.inject.Inject
 
 /**
@@ -27,6 +27,7 @@ class MainFragment : DaggerFragment(), MainView {
     lateinit var presenter: MainFragmentPresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater?.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -35,18 +36,29 @@ class MainFragment : DaggerFragment(), MainView {
         presenter.setView(this)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?,menuInflater:MenuInflater?) {
+        menuInflater?.inflate(R.menu.menu_bottom, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.action_profile -> activity.replaceFragment(R.id.container, ProfileFragment.instance(), null)
+            android.R.id.home -> activity.onBackPressed()
+            else -> return false
+        }
+        return true
+    }
+
     override fun showUsers(list: List<User>) {
         placeholder.visibility = View.GONE
-        if (recycler_view.adapter == null) {
-            recycler_view.adapter = UserAdapter()
-        }
+        if (recycler_view.adapter == null) recycler_view.adapter = UserAdapter()
         val userAdapter = recycler_view.adapter as UserAdapter
         userAdapter.setUsers(list)
     }
 
     override fun showEmptyPlaceholder() {
         placeholder.visibility = View.VISIBLE
-        progress_bar.hideScaled(View.INVISIBLE,{
+        progress_bar.hideScaled(View.INVISIBLE, {
             placeholder_image.setImageResource(R.drawable.ic_clear_gray_24dp)
             placeholder_image.showScaled()
         })

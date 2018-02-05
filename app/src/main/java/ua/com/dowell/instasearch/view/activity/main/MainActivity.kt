@@ -24,19 +24,6 @@ class MainActivity : DaggerAppCompatActivity(), MainView {
         replaceFragment(R.id.container, MainFragment.instance())
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_bottom, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.action_profile -> replaceFragment(R.id.container, ProfileFragment.instance(), null)
-            else -> return false
-        }
-        return true
-    }
-
     companion object {
         fun start(context: Context, isClear: Boolean = false) {
             val intent = Intent(context, MainActivity::class.java)

@@ -1,5 +1,7 @@
 package ua.com.dowell.instasearch.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -26,12 +28,15 @@ class UserAdapter : RecyclerView.Adapter<UserHolder>() {
 
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         val user = list[position]
+        val context = holder.itemView.context
+        val instagramUri = Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/${user.username}"))
         Picasso.with(holder.itemView?.context)
                 .load(user.avatar)
                 .transform(CircleTransform())
                 .into(holder.avatar)
         holder.fullName.text = user.fullName
         holder.username.text = user.username
+        holder.itemView.setOnClickListener { context.startActivity(instagramUri) }
     }
 
     fun setUsers(list: List<User>) {

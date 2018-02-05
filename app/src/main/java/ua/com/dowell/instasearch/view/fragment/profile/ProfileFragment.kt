@@ -1,7 +1,9 @@
 package ua.com.dowell.instasearch.view.fragment.profile
 
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
@@ -23,12 +25,32 @@ class ProfileFragment : DaggerFragment(), ProfileView {
     lateinit var profilePresenter: ProfilePresenter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        setHasOptionsMenu(true)
         return inflater?.inflate(R.layout.fragment_profile, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         profilePresenter.setView(this)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> activity.onBackPressed()
+            else -> return false
+        }
+        return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setIsShowHomeButton(true)
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        setIsShowHomeButton(false)
     }
 
     override fun hideProgressBar() {
@@ -54,6 +76,15 @@ class ProfileFragment : DaggerFragment(), ProfileView {
                 .into(avatar)
         full_name.text = user.fullName
         username.text = user.username
+    }
+
+    private fun setIsShowHomeButton(boolean: Boolean) {
+        val activity = activity
+        if (activity is AppCompatActivity) {
+            val supportActionBar = activity.supportActionBar
+            supportActionBar?.setDisplayHomeAsUpEnabled(boolean)
+            supportActionBar?.setDisplayShowHomeEnabled(boolean)
+        }
     }
 
     companion object {

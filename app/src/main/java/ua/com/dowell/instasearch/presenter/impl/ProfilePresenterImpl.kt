@@ -18,13 +18,17 @@ class ProfilePresenterImpl(
 
     private val seekBarListener = object : SeekBar.OnSeekBarChangeListener {
         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-            accountHelper.setDistanceSettings(progress)
-            view?.setDistanceValue(progress)
+            val fixedProgress = if (progress <= 5) {
+                seekBar?.progress = progress + 5
+                progress + 5
+            } else progress
+
+            accountHelper.setDistanceSettings(fixedProgress)
+            view?.setDistanceValue(fixedProgress)
         }
 
         override fun onStartTrackingTouch(seekBar: SeekBar?) = Unit
         override fun onStopTrackingTouch(seekBar: SeekBar?) = Unit
-
     }
     private var view: ProfileView? = null
 

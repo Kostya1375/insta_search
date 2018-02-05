@@ -1,6 +1,8 @@
 package ua.com.dowell.instasearch.model.impl
 
 import android.location.Location
+import android.os.Handler
+import timber.log.Timber
 import ua.com.dowell.instasearch.model.LocationProvider
 import ua.com.dowell.instasearch.model.pojo.LocationQuery
 import java.util.concurrent.TimeUnit
@@ -16,12 +18,25 @@ abstract class AbsLocationProvider : LocationProvider {
     private var listener: ((location: Location) -> Unit)? = null
     private var simpleListener: ((location: LocationQuery.Location) -> Unit)? = null
 
-    internal val period = 3L
+    internal val period = 1L
     internal val periodMillis = TimeUnit.MINUTES.toMillis(period)
+    private val handler = Handler()
+    private val runnable = {
+        location?.let(this::setNewLocation)
+        runHandler()
+    }
 
 
     override fun getSimpleLocation(): LocationQuery.Location? = simpleLocation
     override fun getLocation(): Location? = location
+
+    override fun startSpectating() {
+        runHandler()
+    }
+
+    override fun stopSpectating() {
+        handler.removeCallbacks(runnable)
+    }
 
     override fun onNewLocation(listener: (location: Location) -> Unit) {
         this.listener = listener
@@ -32,10 +47,15 @@ abstract class AbsLocationProvider : LocationProvider {
     }
 
     fun setNewLocation(location: Location) {
+        Timber.d("New location acquired! $location")
         val simpleLocation = LocationQuery.Location(location.latitude.toFloat(), location.longitude.toFloat())
         this.simpleLocation = simpleLocation
         this.location = location
         simpleListener?.invoke(simpleLocation)
         listener?.invoke(location)
+    }
+
+    private fun runHandler() {
+        handler.postDelayed(runnable, periodMillis)
     }
 }

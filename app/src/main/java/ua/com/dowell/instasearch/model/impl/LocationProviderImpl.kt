@@ -20,30 +20,20 @@ class LocationProviderImpl @Inject constructor(context: Context) : AbsLocationPr
 
     private val manager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-    private val runnable = {
-        location?.let(this::setNewLocation)
-        runHandler()
-    }
-    private val handler = Handler()
     private var lastUpdate = SystemClock.uptimeMillis()
     private var onResume = true
 
     override fun startSpectating() {
+        super.startSpectating()
         Timber.d("Looking for location")
         onResume = true
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0L, 0F, this)
         manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0F, this)
-        runHandler()
-    }
-
-    private fun runHandler() {
-        handler.postDelayed(runnable, periodMillis)
     }
 
     override fun stopSpectating() {
-        Timber.d("Stopping looking for location")
+        super.stopSpectating()
         manager.removeUpdates(this)
-        handler.removeCallbacks(runnable)
     }
 
     override fun onLocationChanged(location: Location?) {
