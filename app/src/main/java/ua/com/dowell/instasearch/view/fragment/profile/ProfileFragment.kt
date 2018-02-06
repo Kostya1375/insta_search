@@ -12,6 +12,8 @@ import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 import ua.com.dowell.instasearch.R
 import ua.com.dowell.instasearch.misc.CircleTransform
+import ua.com.dowell.instasearch.misc.hideScaled
+import ua.com.dowell.instasearch.misc.showScaled
 import ua.com.dowell.instasearch.model.pojo.User
 import ua.com.dowell.instasearch.presenter.ProfilePresenter
 import javax.inject.Inject
@@ -20,6 +22,13 @@ import javax.inject.Inject
  * Created by kosty on 31.01.2018.
  */
 class ProfileFragment : DaggerFragment(), ProfileView {
+    override fun showError() {
+        placeholder.visibility = View.VISIBLE
+        progress_bar.hideScaled(View.INVISIBLE, {
+            placeholder_image.setImageResource(R.drawable.ic_clear_red_24dp)
+            placeholder_image.showScaled()
+        })
+    }
 
     @Inject
     lateinit var profilePresenter: ProfilePresenter
@@ -45,7 +54,6 @@ class ProfileFragment : DaggerFragment(), ProfileView {
     override fun onResume() {
         super.onResume()
         setIsShowHomeButton(true)
-
     }
 
     override fun onPause() {
@@ -70,6 +78,7 @@ class ProfileFragment : DaggerFragment(), ProfileView {
     }
 
     override fun fillViews(user: User) {
+        placeholder.visibility = View.GONE
         Picasso.with(context)
                 .load(user.avatar)
                 .transform(CircleTransform())

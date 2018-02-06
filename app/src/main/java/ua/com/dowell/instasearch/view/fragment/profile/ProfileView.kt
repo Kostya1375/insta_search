@@ -9,6 +9,7 @@ import ua.com.dowell.instasearch.view.BaseView
  */
 interface ProfileView : BaseView {
     fun fillViews(user: User)
+    fun showError()
     fun hideProgressBar()
     fun setDistanceBarValue(value: Int)
     fun setDistanceListener(listener: SeekBar.OnSeekBarChangeListener)

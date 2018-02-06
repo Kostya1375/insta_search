@@ -1,5 +1,6 @@
 package ua.com.dowell.instasearch.presenter.impl
 
+import android.support.v4.widget.SwipeRefreshLayout
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
@@ -22,6 +23,11 @@ class MainFragmentPresenterImpl(
 
     private var mainView: MainView? = null
 
+    private val listener: SwipeRefreshLayout.OnRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        val location = locationProvider.getSimpleLocation()
+        location?.let { requestNearbyUsers(it) }
+    }
+
     override fun setView(view: MainView) {
         mainView = view
         if (mainView != null) onViewSet()
@@ -30,6 +36,7 @@ class MainFragmentPresenterImpl(
     private fun onViewSet() {
         if (mainView?.checkPermissions() != true) mainView?.requestPermissions()
         else onPermissionGranted()
+        mainView?.setSwipeListener(listener)
     }
 
     override fun onPermissionGranted() {
@@ -45,8 +52,10 @@ class MainFragmentPresenterImpl(
                 val distance = accountHelper.getDistanceSettings()
                 val list = api.getNearby(LocationQuery(location, distance)).await()
                 launch(UI) {
-                    if (list.isNotEmpty()) mainView?.showUsers(list)
-                    else mainView?.showEmptyPlaceholder()
+                    if (list.isNotEmpty()) {
+                        mainView?.onUpdateFinish()
+                        mainView?.showUsers(list)
+                    } else mainView?.showEmptyPlaceholder()
                 }
             } catch (e: Exception) {
                 Timber.e(e)

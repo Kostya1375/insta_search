@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.widget.SwipeRefreshLayout
 import android.view.*
 import dagger.android.support.DaggerFragment
 import kotlinx.android.synthetic.main.fragment_main.*
@@ -36,7 +37,19 @@ class MainFragment : DaggerFragment(), MainView {
         presenter.setView(this)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?,menuInflater:MenuInflater?) {
+    override fun setSwipeListener(listener: SwipeRefreshLayout.OnRefreshListener) {
+        swipe_refresh_layout.setOnRefreshListener(listener)
+    }
+
+    override fun onUpdateStart() {
+//        swipe_refresh_layout.isRefreshing = true
+    }
+
+    override fun onUpdateFinish() {
+        swipe_refresh_layout.isRefreshing = false
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, menuInflater: MenuInflater?) {
         menuInflater?.inflate(R.menu.menu_bottom, menu)
     }
 

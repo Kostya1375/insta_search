@@ -1,5 +1,6 @@
 package ua.com.dowell.instasearch.view.fragment.main
 
+import android.support.v4.widget.SwipeRefreshLayout
 import ua.com.dowell.instasearch.model.pojo.User
 import ua.com.dowell.instasearch.view.BaseView
 
@@ -11,5 +12,8 @@ interface MainView : BaseView {
     fun requestPermissions()
     fun showUsers(list: List<User>)
     fun showEmptyPlaceholder()
+    fun setSwipeListener(listener: SwipeRefreshLayout.OnRefreshListener)
+    fun onUpdateStart()
+    fun onUpdateFinish()
     fun showError()
 }
